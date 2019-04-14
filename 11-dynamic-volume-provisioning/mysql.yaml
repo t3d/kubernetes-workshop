@@ -34,6 +34,14 @@ spec:
       labels:
         app: mysql
     spec:
+      initContainers:
+        - name: busybox
+          image: busybox
+          command: ["rm"]
+          args: ["-fr", "/var/lib/mysql/lost+found"]
+          volumeMounts:
+            - name: mysql
+              mountPath: /var/lib/mysql
       containers:
         - name: mysql
           image: mysql/mysql-server:5.7
