@@ -10,3 +10,4 @@
 8. [Config Maps](08-config-maps/)
 9. [Secrets](09-secrets/)
 10. [Volumes](10-volumes/)
+11. [Dynamic Volume Provisioning](11-dynamic-volume-provisioning/)
