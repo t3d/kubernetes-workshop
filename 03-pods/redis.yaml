@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-1
+  labels:
+    app: redis
+spec:
+  containers:
+    - name: redis
+      image: redis:4.0
+      ports:
+        - containerPort: 6379
+  nodeSelector:
+    disktype: ssd
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-2
+spec:
+  containers:
+    - name: redis
+      image: redis:4.0
+      ports:
+        - containerPort: 6379
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-3
+  labels:
+    app: redis
+spec:
+  containers:
+    - name: redis
+      image: redis:4.0
+      ports:
+        - containerPort: 6379
+      command: ["true"]
+  restartPolicy: Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-4
+spec:
+  containers:
+    - name: redis
+      image: redis:4.0
+      ports:
+        - containerPort: 6379
+      command: ["false"]
+  restartPolicy: Never
