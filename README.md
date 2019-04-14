@@ -8,3 +8,4 @@
 6. [Services](06-services/)
 7. [Container Probes](07-container-probes/)
 8. [Config Maps](08-config-maps/)
+9. [Secrets](09-secrets/)
