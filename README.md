@@ -9,3 +9,4 @@
 7. [Container Probes](07-container-probes/)
 8. [Config Maps](08-config-maps/)
 9. [Secrets](09-secrets/)
+10. [Volumes](10-volumes/)
