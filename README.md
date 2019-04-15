@@ -12,4 +12,5 @@
 10. [Volumes](10-volumes/)
 11. [Dynamic Volume Provisioning](11-dynamic-volume-provisioning/)
 12. [Deployment Strategies](12-deployment-strategies/)
-13. [Lobsters](13-lobsters)
+13. [Lobsters](13-lobsters/)
+14. [Stateful Sets](14-stateful-sets/)
