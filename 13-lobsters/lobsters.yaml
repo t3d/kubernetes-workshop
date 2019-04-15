@@ -1,0 +1,10 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: lobsters
+  labels:
+    app: lobsters
+spec:
+    backend:
+      serviceName: lobsters-rails-server
+      servicePort: 3000

@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: lobsters-rake-db-schema-load
+  labels:
+    app: lobsters
+    component: rake
+spec:
+  template:
+    metadata:
+      labels:
+        app: lobsters
+        component: rake
+    spec:
+      containers:
+        - name: lobsters
+          image: mstrzele/lobsters:latest
+          envFrom:
+            - secretRef:
+                name: mysql
+          env:
+            - name: DATABASE_URL
+              value: mysql2://$(MYSQL_USER):$(MYSQL_PASSWORD)@mysql/$(MYSQL_DATABASE)
+          command: ["rake"]
+          args: ["db:schema:load"]
+      restartPolicy: OnFailure

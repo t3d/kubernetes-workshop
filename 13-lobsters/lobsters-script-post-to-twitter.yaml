@@ -1,0 +1,30 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: lobsters-script-post-to-twitter
+  labels:
+    app: lobsters
+    component: script
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: lobsters
+            component: rake
+        spec:
+          containers:
+            - name: lobsters
+              image: mstrzele/lobsters:latest
+              envFrom:
+                - secretRef:
+                    name: mysql
+              env:
+                - name: DATABASE_URL
+                  value: mysql2://$(MYSQL_USER):$(MYSQL_PASSWORD)@mysql/$(MYSQL_DATABASE)
+              command: ["bundle"]
+              args: ["exec", "ruby", "script/post_to_twitter"]
+          restartPolicy: OnFailure
+  concurrencyPolicy: Forbid

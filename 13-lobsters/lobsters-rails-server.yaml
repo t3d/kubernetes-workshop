@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lobsters-rails-server
+  labels:
+    app: lobsters
+    component: rails
+spec:
+  selector:
+    matchLabels:
+      app: lobsters
+      component: rails
+  template:
+    metadata:
+      labels:
+        app: lobsters
+        component: rails
+    spec:
+      containers:
+        - name: lobsters
+          image: mstrzele/lobsters:latest
+          envFrom:
+            - secretRef:
+                name: mysql
+          env:
+            - name: DATABASE_URL
+              value: mysql2://$(MYSQL_USER):$(MYSQL_PASSWORD)@mysql/$(MYSQL_DATABASE)
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lobsters-rails-server
+  labels:
+    app: lobsters
+    component: rails
+spec:
+  selector:
+    app: lobsters
+    component: rails
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: NodePort
